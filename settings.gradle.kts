@@ -1,0 +1,1 @@
+rootProject.name = "kafka-beginers-course-practice"
