@@ -2,6 +2,7 @@ package io.condoktor.demo;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.CooperativeStickyAssignor;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.errors.WakeupException;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -14,9 +15,9 @@ import java.util.Properties;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class ConsumerDemoWithShutdown {
+public class ConsumerDemoCooperative {
 
-    private static final Logger log = LoggerFactory.getLogger(ConsumerDemoWithShutdown.class);
+    private static final Logger log = LoggerFactory.getLogger(ConsumerDemoCooperative.class);
     public static void main(String[] args) {
 
         log.info("I am kafka consumer!");
@@ -26,7 +27,7 @@ public class ConsumerDemoWithShutdown {
 
         //connect to the Localhost
         properties.setProperty("bootstrap.servers", "127.0.0.1:9092");
-
+        properties.setProperty("partition assignment strategy ", CooperativeStickyAssignor.class.getName());
         //connect consumer configs
         properties.setProperty("key.deserializer", StringDeserializer.class.getName());
         properties.setProperty("value.deserializer", StringDeserializer.class.getName());
